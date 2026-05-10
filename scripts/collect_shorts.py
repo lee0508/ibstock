@@ -1,4 +1,5 @@
 import json
+import argparse
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -58,8 +59,12 @@ def collect_shorts(limit: int = 50) -> list[dict]:
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description="Collect YouTube shorts metadata")
+    parser.add_argument("--limit", type=int, default=50, help="playlist items to collect")
+    args = parser.parse_args()
+
     RAW_DIR.mkdir(parents=True, exist_ok=True)
-    items = collect_shorts()
+    items = collect_shorts(limit=args.limit)
     payload = {
         "collected_at": datetime.now(timezone.utc).isoformat(),
         "channel_url": CHANNEL_URL,
