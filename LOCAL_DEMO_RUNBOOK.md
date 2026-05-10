@@ -22,6 +22,7 @@ PowerShell 창 2:
 
 ```powershell
 cd C:\xampp\htdocs\ibstock
+powershell -ExecutionPolicy Bypass -File .\scripts\run_preflight.ps1
 powershell -ExecutionPolicy Bypass -File .\scripts\run_local_demo.ps1
 ```
 
@@ -72,4 +73,17 @@ Uvicorn running on http://127.0.0.1:8081
 python -X utf8 scripts\preprocess.py
 python -X utf8 scripts\init_db.py
 python -X utf8 scripts\build_index.py
+```
+
+### 사전 점검만 실행하고 싶을 때
+
+```powershell
+cd C:\xampp\htdocs\ibstock
+python -X utf8 scripts\preflight_check.py --ollama-host http://127.0.0.1:11434
+```
+
+Ollama까지 필수로 체크하려면:
+
+```powershell
+python -X utf8 scripts\preflight_check.py --strict-ollama
 ```
