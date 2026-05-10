@@ -38,6 +38,17 @@ http://127.0.0.1:8081/frontend/index.html
 2. `대한전선` 검색
 3. `JP모건` 검색
 4. `질의 응답` 버튼으로 생성형 답변 또는 fallback 답변 확인
+5. 자동 검증 리포트 생성:
+
+```powershell
+python -X utf8 scripts\verify_local_demo.py
+```
+
+생성 파일:
+
+```text
+2026-05-10_로컬실기동및Query검증.md
+```
 
 ## 4. 현재 로컬 기준 상태
 
