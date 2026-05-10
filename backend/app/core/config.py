@@ -1,6 +1,7 @@
 from functools import lru_cache
 from pathlib import Path
 
+from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -42,6 +43,19 @@ class Settings(BaseSettings):
     @property
     def sqlite_file(self) -> Path:
         return (PROJECT_ROOT / self.sqlite_path).resolve()
+
+    @field_validator("debug", mode="before")
+    @classmethod
+    def parse_debug(cls, value):
+        if isinstance(value, bool):
+            return value
+        if isinstance(value, str):
+            normalized = value.strip().lower()
+            if normalized in {"1", "true", "yes", "y", "on", "debug", "dev", "development"}:
+                return True
+            if normalized in {"0", "false", "no", "n", "off", "release", "prod", "production"}:
+                return False
+        return value
 
     @property
     def reference_dir(self) -> Path:
