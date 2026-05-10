@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+pydantic-settings
+httpx
+yt-dlp
+faiss-cpu
+numpy
